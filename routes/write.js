@@ -6,9 +6,8 @@ router.get('/' , (_, res) => {
 	res.render('admin/write');
 });
 
-router.post('/' , (req, res) => {
+router.post('/' , (req, res) => {	
 	const product = new todoModel(req.body);
-
 	if(!product.validateSync()){
 		product.save()
 		.then(data => res.redirect('/write'))
