@@ -4,7 +4,7 @@
   "description": "Basic Node.js, MongoDB\\ Node.js, MongoDB으로 기본적인 CRUD 기능이 있는 TODO 사이트를 구현합니다.",
   "main": "app.js",
   "scripts": {
-    "dev": "node app.js"
+    "start:dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,8 @@
     "mongodb": "^4.4.0",
     "mongoose": "^6.2.3",
     "mongoose-plugin-autoinc": "^1.1.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
