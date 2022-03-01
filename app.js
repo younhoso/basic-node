@@ -14,7 +14,8 @@ db.once('open', function(){
 });
 
 //라우터 경로를 가져온다.
-const routes = require('./routes/index');
+const home = require('./routes/home');
+const write = require('./routes/write');
 
 const app = express();
 
@@ -28,10 +29,11 @@ mongoose
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routing 미들웨어
-app.use('/', routes);
+app.use('/', home);
+app.use('/write', write);
 
 app.listen(`${PORT}`, () => {
   console.log(`Example app listening on port! http://localhost:${PORT}`);

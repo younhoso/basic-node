@@ -5,8 +5,8 @@ const { autoIncrement } = require('mongoose-plugin-autoinc');
 //생성될 필드명을 정한다.
 const reviewSchema = new Schema({
 	title: String,
-	author: String
+	desc: String
 });
 
-reviewSchema.plugin( autoIncrement, { model : "todo", field : "id" , startAt : 1 } );
-module.exports = mongoose.model('todo' , reviewSchema);
+reviewSchema.plugin( autoIncrement, { model : "todoapp", field : "id" , startAt : 1 } );
+module.exports = mongoose.model('todoapp' , reviewSchema);

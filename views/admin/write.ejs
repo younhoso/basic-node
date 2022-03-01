@@ -1,0 +1,19 @@
+<%- include('../header.ejs') %>
+
+<h4 class="container mt-4"><strong>글 작성페이지</strong></h4>
+
+<div class="container mt-3">
+	<form action="/write" method="POST">
+		<div class="mb-3">
+			<label for="exampleFormControlInput1" class="form-label">Post title</label>
+			<input type="text" class="form-control" id="exampleFormControlInput1" name="title" placeholder="글 제목">
+		</div>
+		<div class="mb-3">
+			<label for="exampleFormControlTextarea1" class="form-label">Post textarea</label>
+			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc" placeholder="글 내용"></textarea>
+		</div>
+		<button type="submit" class="btn btn-primary">Primary</button>
+	</form>
+</div>
+
+<%- include('../footer.ejs') %>
