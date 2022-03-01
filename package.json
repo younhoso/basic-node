@@ -1,0 +1,29 @@
+{
+  "name": "basic-node",
+  "version": "1.0.0",
+  "description": "Basic Node.js, MongoDB\\ Node.js, MongoDB으로 기본적인 CRUD 기능이 있는 TODO 사이트를 구현합니다.",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/younhoso/basic-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/younhoso/basic-node/issues"
+  },
+  "homepage": "https://github.com/younhoso/basic-node#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "mongodb": "^4.4.0",
+    "mongoose": "^6.2.3",
+    "mongoose-plugin-autoinc": "^1.1.9"
+  }
+}
