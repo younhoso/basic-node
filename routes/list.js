@@ -8,8 +8,10 @@ router.get('/' , (_, res) => {
 	.catch(err => res.status(500).send(err))
 });
 
-router.delete('/delete', (req, _) => {
-	console.log(req.body)
+router.delete('/delete/:id', (req, res) => {
+	todoModel.deleteOne({id : parseInt(req.params.id)})
+	.then(data => res.json({ message : "success" }))
+	.catch(err => res.status(500).send(err))
 })
 
 module.exports = router;
