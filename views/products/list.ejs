@@ -19,8 +19,8 @@
 		}).done((data) => {
 			console.log(data)
 			$(e.currentTarget).parent('li').fadeOut();
-		}).fail((err) => {
-			console.log(err)
+		}).fail((xhr,textStatus,err) => {
+			console.log(xhr,textStatus,err)
 		})
 	};
 	$('.delete').on('click', DeleteFun);
