@@ -30,7 +30,11 @@ mongoose
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// 미들웨어 셋팅
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//static path 추가
+app.use('/static', express.static('static'));
 
 // Routing 미들웨어
 app.use('/', home);
