@@ -17,6 +17,7 @@ db.once('open', function(){
 const home = require('./routes/home');
 const write = require('./routes/write');
 const list = require('./routes/list');
+const detail = require('./routes/detail')
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use('/static', express.static('static'));
 app.use('/', home);
 app.use('/write', write);
 app.use('/list', list);
+app.use('/detail', detail);
 
 app.listen(`${PORT}`, () => {
   console.log(`Example app listening on port! http://localhost:${PORT}`);
