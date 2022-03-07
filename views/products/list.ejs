@@ -2,9 +2,10 @@
 <ul class="list-group">
   <% all_datas.forEach((data, idx) => { %>
   <li class="list-group-item">
+		<p>글 번호: <%- data.id %></p>
     <h4> <a href="detail/<%- data.id %>"><%- data.title %></a> </h4>
     <p><%- data.desc %> </p>
-    <button class="btn btn-primary">수정</button>
+    <a href="list/edit/<%- data.id %>" class="btn btn-primary">수정</a>
 		<button class="delete btn btn-danger" data-id="<%- data.id %>">삭제</button>
   </li>
   <% }) %>
