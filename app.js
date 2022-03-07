@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 require('dotenv').config();
 
 //MongoDB 접속
@@ -27,6 +28,7 @@ mongoose
 .then(() => console.log('Successfully connected to mongodb'))
 .catch(e => console.error(e));
 
+app.use(methodOverride('_method'));
 // 확장자가 ejs 로 끈나는 뷰 엔진을 추가한다.
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
