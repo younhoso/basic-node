@@ -25,6 +25,7 @@ const write = require('./routes/write');
 const list = require('./routes/list');
 const detail = require('./routes/detail')
 const accounts = require('./routes/accounts')
+const mypage = require('./routes/mypage')
 
 const app = express();
 
@@ -68,6 +69,7 @@ app.use('/write', write);
 app.use('/list', list);
 app.use('/detail', detail);
 app.use('/accounts', accounts);
+app.use('/mypage', mypage);
 
 app.listen(`${PORT}`, () => {
   console.log(`Example app listening on port! http://localhost:${PORT}`);

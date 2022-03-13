@@ -11,10 +11,8 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((user, done) => {
-	var result = user;
-	result.password = "";
 	console.log('deserializeUser');
-	done(null, result);
+	done(null, user);
 });
 /* // 세션 만들고 세션아이디 발급해서 쿠키로 보내주기 */
 
