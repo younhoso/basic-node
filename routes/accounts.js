@@ -48,7 +48,7 @@ router.get('/login',(req, res) => {
 });
 
 router.post('/login', passport.authenticate('local', { 
-	failureRedirect: '/fail'
+	failureRedirect: '/accounts/fail'
 }), (req, res) => {
 	res.send('<script>alert("로그인 성공");\
 	location.href="/";</script>');
