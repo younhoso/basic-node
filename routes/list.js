@@ -29,12 +29,15 @@ router.get('/edit/:id', async (req, res) => {
 });
 
 router.put('/edit', async (req, res) => {
-	// 폼에담긴 제목데이터, 날짜데이터를 가지고
+	// 폼에담긴 제목데이터, 날짜데이터를 가지고 todoModel에다가 업데이트하기
+	const {id, title, desc} = req.body;
 	try {
-		await todoModel.updateOne({id: parseInt(req.body.id)},{$set: {title: req.body.title, desc: req.body.desc}}).exec();
+		await todoModel.updateOne({id: parseInt(id)},{$set: {title, desc}})
 		res.redirect('/list')
 	} catch (e) {
-	
+		res.status(500).json({
+      message: "data 수정 실패"
+    });
 	}
 });
 
