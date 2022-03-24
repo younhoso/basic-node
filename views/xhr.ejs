@@ -24,96 +24,60 @@
 
 	<div class="inner"></div>
 	
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
 		(() => {
-				const $ = (select) => document.querySelector(select)
+			let arrayNew = new Array();
+			const $ = (select) => document.querySelector(select)
 
-				const progressBar = (per, size) => {
-					let i = new Array();
-					// $(".progressText").innerText = Math.floor(per)+" %";
-					// $(".progressNow").style.width = "calc(" + per + "% - 20px)";
+			const addFiles = (e) => {
+				e.preventDefault();
+				const files = e.target.files;
+				const filesArr = Array.prototype.slice.call(files);
+				const temp_html = filesArr.map((el) => {
+					return `
+						<div class="progressContainer">
+							<div class="progress progressTotal"></div>
+							<div class="progress progressNow"></div>
+							<div class="progressText">0%</div>
+						</div>
+					`
+				}).join('');
+				$('.inner').innerHTML = temp_html
+			}
 
-					const template = size.map((item) => {
-						return `
-							<div class="progressContainer">
-								<div class="progress progressTotal"></div>
-								<div class="progress progressNow" style="width:calc(${per}% - 20px)"></div>
-								<div class="progressText">${per}</div>
-							</div>
-						`
-					}).join('');
-					$('.inner').innerHTML = template;
+			const upload = (e) => {
+				e.preventDefault();
+				const progres = Array.from(document.querySelectorAll('.progressContainer'));
+				const onUploadProgress = (idx) => (e) => {
+					if(e.lengthComputable){
+						// 업로드 진행률 계산
+						const percentCompleted = Math.round((e.loaded / e.total) * 100);
+						progres[idx].querySelector('.progressText').innerText = Math.floor(percentCompleted)+" %";
+						progres[idx].querySelector('.progressNow').style.width = "calc(" + percentCompleted + "% - 20px)";
+					} else {
+						// 측정 불가
+					}
 				};
 
-				const xhrFun = (e) => {
-					e.preventDefault();
-					let sizeArr = new Array();
-					const xhr = new XMLHttpRequest();
+				const files = $('input[type="file"]').files
+				const filesArr = Array.prototype.slice.call(files);
+				filesArr.forEach((el, i) => {
+					const data = new FormData()
+					data.append('file', files[i])
+				
+					axios.post('/file/upload-file', data, {
+						onUploadProgress: onUploadProgress(i)
+					}).then(res => {
+							console.log(res.data.massage)
+						})
+						.catch(err => console.log(err))
+				});
+			};
 
-					xhr.upload.addEventListener('loadstart', function(e) {
-						console.log('시작')
-					});
-					/*
-						progress 이벤트 핸들러는
-						전송할 총 바이트 수 total과 이벤트 및 loaded 필드에서 지금까지 전송 된 바이트 수를 받습니다.
-					*/
-					xhr.upload.addEventListener('progress', function(e) {
-						if( e.lengthComputable ) {
-							// 업로드 진행률 계산
-							const percentComplete = Math.floor((e.loaded / e.total) * 100); 
-							progressBar(percentComplete, sizeArr)
-						} else {
-							// 측정 불가
-						}
-
-						
-					});
-					xhr.upload.addEventListener('load', function(e) {
-						
-					});
-					xhr.upload.addEventListener('loadend', function(e) {
-						console.log('완료')
-					});
-
-					xhr.upload.addEventListener('error', function(e) {
-						console.log('요청이 실패했을 때')
-					});
-					xhr.upload.addEventListener('abort', function(e) {
-						console.log('요청이 중단되었을 때')
-					});
-					xhr.upload.addEventListener('timeout', function(e) {
-						console.log('요청이 완료되기 전에 작성자가 지정한 타임아웃이 지났을 때')
-					});
-
-					xhr.open('POST', '/file/upload-file', true);
-					// xhr.open('POST', '/upload-file', false);  //false로 하면 동기 처리
-
-					xhr.addEventListener('readystatechange', function (event) {
-						const { target } = event; 
-						if (target.readyState === XMLHttpRequest.DONE) { 
-							const { status } = target; 
-							if (status === 0 || (status >= 200 && status < 400)) {
-								// 요청이 정상적으로 처리 된 경우 } 
-								console.log(target.response);
-							} else {
-								// 에러가 발생한 경우 
-							} 
-						};
-					});
-
-					const files = $('input[name=file]').files;
-					const filesArr = Array.prototype.slice.call(files);
-					for(let i = 0; i <= filesArr.length; i++){
-						const el = filesArr[i];
-						console.log(String(el.size))
-						sizeArr.push(String(el.size))
-					};
-					const formData = new FormData();
-					xhr.send(formData);
-				};
-
-				$('#btn').addEventListener('click', xhrFun);
-		})()
+			$('input[type="file"]').addEventListener("change", addFiles);
+			$('#btn').addEventListener('click', upload);
+		})();
 	</script>
 </body>
 </html>
