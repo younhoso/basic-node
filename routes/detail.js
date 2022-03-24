@@ -11,7 +11,7 @@ router.get('/:id', async (req, res) => {
 		}
 	} catch (e) {
 		res.status(500).json({
-      message: "data 조회 실패",
+      'message': 'data 조회 실패',
     });
 	}
 });
